@@ -96,9 +96,9 @@ const result = objectTemplate.compile({
   greeting: 'Hello, {{name}}!'
 }, {
   name: 'John Doe'
-});
+})
 
-console.log(result);
+console.log(result)
 > {
 >   greeting: 'Hello, John Doe!'
 > }
@@ -122,9 +122,9 @@ const data = objectTemplate.decompile({
   greeting: 'Hello, {{name}}!'
 }, {
   greeting: 'Hello, John Doe!'
-});
+})
 
-console.log(data);
+console.log(data)
 > {
 >   name: 'John Doe'
 > }
@@ -149,7 +149,7 @@ if (objectTemplate.matches({
 }, }
   foo: 'bar'
 )) {
-  console.log('This is a match!');
+  console.log('This is a match!')
 }
 ```
 

@@ -17,15 +17,15 @@
 'use strict'
 
 const ava = require('ava')
-const jsontemplate = require('..')
+const objectTemplate = require('..')
 
 const testBidirectionalCompilation = (title, template, data, result) => {
   ava.test(`.compile() should compile ${title}`, (test) => {
-    test.deepEqual(jsontemplate.compile(template, data), result)
+    test.deepEqual(objectTemplate.compile(template, data), result)
   })
 
   ava.test(`.decompile() should decompile ${title}`, (test) => {
-    test.deepEqual(jsontemplate.decompile(template, result), data)
+    test.deepEqual(objectTemplate.decompile(template, result), data)
   })
 }
 

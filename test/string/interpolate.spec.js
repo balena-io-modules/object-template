@@ -93,3 +93,42 @@ ava.test('.interpolate() should be able to force a string type on a dependent st
     age: 43
   }), '43')
 })
+
+ava.test('.interpolate() should interpolate an object', (test) => {
+  test.deepEqual(string.interpolate('{{person}}', {
+    person: {
+      name: 'John Doe',
+      email: 'johndoe@example.com'
+    }
+  }), {
+    name: 'John Doe',
+    email: 'johndoe@example.com'
+  })
+})
+
+ava.test('.interpolate() should stringify an object when casting it to string', (test) => {
+  test.deepEqual(string.interpolate('{{string:person}}', {
+    person: {
+      name: 'John Doe',
+      email: 'johndoe@example.com'
+    }
+  }), '{"name":"John Doe","email":"johndoe@example.com"}')
+})
+
+ava.test('.interpolate() should stringify an object when interpolating it along with other text', (test) => {
+  test.deepEqual(string.interpolate('Foo {{person}}', {
+    person: {
+      name: 'John Doe',
+      email: 'johndoe@example.com'
+    }
+  }), 'Foo {"name":"John Doe","email":"johndoe@example.com"}')
+})
+
+ava.test('.interpolate() should stringify an object with type string when interpolating it along with other text', (test) => {
+  test.deepEqual(string.interpolate('Foo {{string:person}}', {
+    person: {
+      name: 'John Doe',
+      email: 'johndoe@example.com'
+    }
+  }), 'Foo {"name":"John Doe","email":"johndoe@example.com"}')
+})

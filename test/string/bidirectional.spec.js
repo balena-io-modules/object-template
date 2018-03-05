@@ -216,6 +216,31 @@ _.each([
   },
 
   // -------------------------------------------------------------------
+  // Object interpolation
+  // -------------------------------------------------------------------
+
+  {
+    template: '{{person}}',
+    data: {
+      person: {
+        email: 'johndoe@example.com'
+      }
+    },
+    result: {
+      email: 'johndoe@example.com'
+    }
+  },
+  {
+    template: 'Foo Bar {{object:person}}',
+    data: {
+      person: {
+        email: 'johndoe@example.com'
+      }
+    },
+    result: 'Foo Bar {"email":"johndoe@example.com"}'
+  },
+
+  // -------------------------------------------------------------------
   // String <-> Number casting
   // -------------------------------------------------------------------
 

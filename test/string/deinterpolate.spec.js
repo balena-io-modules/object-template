@@ -84,3 +84,35 @@ ava.test('.deinterpolate() should accept a string type', (test) => {
     age: '21'
   })
 })
+
+ava.test('.deinterpolate() should accept a single object type', (test) => {
+  test.deepEqual(string.deinterpolate('{{person}}', {
+    email: 'johndoe@example.com'
+  }), {
+    person: {
+      email: 'johndoe@example.com'
+    }
+  })
+})
+
+ava.test('.deinterpolate() should accept a single object stringified type', (test) => {
+  test.deepEqual(string.deinterpolate('{{string:person}}', {
+    email: 'johndoe@example.com'
+  }), {
+    person: '{"email":"johndoe@example.com"}'
+  })
+})
+
+ava.test('.deinterpolate() should accept a single object type in a larger string', (test) => {
+  test.deepEqual(string.deinterpolate('Foo {{person}}', 'Foo {"email":"johndoe@example.com"}'), {
+    person: '{"email":"johndoe@example.com"}'
+  })
+})
+
+ava.test('.deinterpolate() should accept a single object type in a larger string as an object', (test) => {
+  test.deepEqual(string.deinterpolate('Foo {{object:person}}', 'Foo {"email":"johndoe@example.com"}'), {
+    person: {
+      email: 'johndoe@example.com'
+    }
+  })
+})

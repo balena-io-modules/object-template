@@ -19,6 +19,14 @@
 const ava = require('ava')
 const string = require('../../lib/string')
 
+ava.test('.interpolate() should use custom delimiters', (test) => {
+  test.deepEqual(string.interpolate('My age is [age]', {
+    age: 21
+  }, {
+    delimiters: [ '\\[', '\\]' ]
+  }), 'My age is 21')
+})
+
 ava.test('.interpolate() should cast positive integer to string if interpolation has context', (test) => {
   test.deepEqual(string.interpolate('My age is {{age}}', {
     age: 21

@@ -103,6 +103,14 @@ ava.test('.deinterpolate() should accept a single object stringified type', (tes
   })
 })
 
+ava.test('.deinterpolate() should accept custom delimiters', (test) => {
+  test.deepEqual(string.deinterpolate('Foo [person]', 'Foo John', {
+    delimiters: [ '\\[', '\\]' ]
+  }), {
+    person: 'John'
+  })
+})
+
 ava.test('.deinterpolate() should accept a single object type in a larger string', (test) => {
   test.deepEqual(string.deinterpolate('Foo {{person}}', 'Foo {"email":"johndoe@example.com"}'), {
     person: '{"email":"johndoe@example.com"}'

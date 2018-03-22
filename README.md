@@ -73,13 +73,13 @@ templates, there can be complex nesting levels and multiple interpolations
 
 
 * [object-template](#module_object-template)
-    * [.compile(template, data)](#module_object-template.compile) ⇒ <code>Object</code>
-    * [.decompile(template, result)](#module_object-template.decompile) ⇒ <code>Object</code>
-    * [.matches(template, object)](#module_object-template.matches) ⇒ <code>Boolean</code>
+    * [.compile(template, data, [options])](#module_object-template.compile) ⇒ <code>Object</code>
+    * [.decompile(template, result, [options])](#module_object-template.decompile) ⇒ <code>Object</code>
+    * [.matches(template, object, [options])](#module_object-template.matches) ⇒ <code>Boolean</code>
 
 <a name="module_object-template.compile"></a>
 
-### object-template.compile(template, data) ⇒ <code>Object</code>
+### object-template.compile(template, data, [options]) ⇒ <code>Object</code>
 **Kind**: static method of [<code>object-template</code>](#module_object-template)  
 **Summary**: Compile a JSON template  
 **Returns**: <code>Object</code> - compilation result  
@@ -89,6 +89,8 @@ templates, there can be complex nesting levels and multiple interpolations
 | --- | --- | --- |
 | template | <code>Object</code> | json template |
 | data | <code>Object</code> | template data |
+| [options] | <code>Object</code> | options |
+| [options.delimiters] | <code>Array.&lt;String&gt;</code> | delimiters |
 
 **Example**  
 ```js
@@ -105,7 +107,7 @@ console.log(result)
 ```
 <a name="module_object-template.decompile"></a>
 
-### object-template.decompile(template, result) ⇒ <code>Object</code>
+### object-template.decompile(template, result, [options]) ⇒ <code>Object</code>
 **Kind**: static method of [<code>object-template</code>](#module_object-template)  
 **Summary**: Decompile a JSON template  
 **Returns**: <code>Object</code> - template data  
@@ -115,6 +117,8 @@ console.log(result)
 | --- | --- | --- |
 | template | <code>Object</code> | json template |
 | result | <code>Object</code> | compilation result |
+| [options] | <code>Object</code> | options |
+| [options.delimiters] | <code>Array.&lt;String&gt;</code> | delimiters |
 
 **Example**  
 ```js
@@ -131,7 +135,7 @@ console.log(data)
 ```
 <a name="module_object-template.matches"></a>
 
-### object-template.matches(template, object) ⇒ <code>Boolean</code>
+### object-template.matches(template, object, [options]) ⇒ <code>Boolean</code>
 **Kind**: static method of [<code>object-template</code>](#module_object-template)  
 **Summary**: Check if a compiled object matches a template  
 **Returns**: <code>Boolean</code> - whether object matches template  
@@ -141,6 +145,8 @@ console.log(data)
 | --- | --- | --- |
 | template | <code>Object</code> | template object |
 | object | <code>Object</code> | compiled object |
+| [options] | <code>Object</code> | options |
+| [options.delimiters] | <code>Array.&lt;String&gt;</code> | delimiters |
 
 **Example**  
 ```js

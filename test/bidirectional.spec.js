@@ -111,6 +111,26 @@ testBidirectionalCompilation('multiple nested independent properties', {
   }
 })
 
+testBidirectionalCompilation('arrays of strings', {
+  array: [
+    '{{person.name}}',
+    '{{person.age}}',
+    '{{person.job}}'
+  ]
+}, {
+  person: {
+    name: 'John Doe',
+    age: '42',
+    job: 'Software Engineer'
+  }
+}, {
+  array: [
+    'John Doe',
+    '42',
+    'Software Engineer'
+  ]
+})
+
 testBidirectionalCompilation('object with arrays of objects', {
   array: [
     {

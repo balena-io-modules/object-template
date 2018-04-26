@@ -71,6 +71,25 @@ The example objects contain one key and a single interpolation, but on real
 templates, there can be complex nesting levels and multiple interpolations
 (even many per property).
 
+Default values
+--------------
+
+Default values can be provided using the `||` operator. The default value should be JSON encoded.
+In the example below, if the `name` value is not provided, the default value
+`John Doe` will be used instead.
+
+```json
+{
+  "foo": "My name is {{name || \"John Doe\"}}"
+}
+
+```
+
+When decompiling a result that used a default value, the default value will be returned.
+
+API
+---
+
 
 * [object-template](#module_object-template)
     * [.compile(template, data, [options])](#module_object-template.compile) ⇒ <code>Object</code>

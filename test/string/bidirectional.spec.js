@@ -21,7 +21,6 @@ const _ = require('lodash')
 const string = require('../../lib/string')
 
 _.each([
-
   // -------------------------------------------------------------------
   // No interpolation
   // -------------------------------------------------------------------
@@ -136,7 +135,6 @@ _.each([
   // -------------------------------------------------------------------
 
   /* eslint-disable camelcase */
-
   {
     template: '{{$name}}',
     data: {
@@ -257,17 +255,76 @@ _.each([
       age: 43
     },
     result: 'Foo 43'
+  },
+
+  // -------------------------------------------------------------------
+  // Default values
+  // -------------------------------------------------------------------
+
+  {
+    template: 'My name is {{name || "Jane"}}',
+    data: {
+      name: 'Jane'
+    },
+    result: 'My name is Jane',
+    usesDefault: true
+  },
+  {
+    template: '{{name || "Jane"}}',
+    data: {
+      name: 'John'
+    },
+    result: 'John'
+  },
+  {
+    template: 'Age is {{age || 6}}',
+    data: {
+      age: 6
+    },
+    result: 'Age is 6',
+    usesDefault: true
+  },
+  {
+    template: 'Foo {{bar || true}} baz',
+    data: {
+      bar: true
+    },
+    result: 'Foo true baz',
+    usesDefault: true
+  },
+  {
+    template: '{{bar || [ 1, 2, 3 ]}}',
+    data: {
+      bar: [ 1, 2, 3 ]
+    },
+    result: [ 1, 2, 3 ],
+    usesDefault: true
+  },
+  {
+    template: '{{bar || { "foo": "bar" }}}',
+    data: {
+      bar: {
+        foo: 'bar'
+      }
+    },
+    result: {
+      foo: 'bar'
+    },
+    usesDefault: true
   }
 
 ], (testCase) => {
   ava.test(`.interpolate() should interpolate ${testCase.template}`, (test) => {
     test.deepEqual(string.interpolate(
       testCase.template,
-      testCase.data
+
+      // When testing default test cases, provide an empty object as data so
+      // that the default functionality is properly tested
+      testCase.usesDefault ? {} : testCase.data
     ), testCase.result)
   })
 
-  ava.test(`.deinterpolate() should deinterpolate ${testCase.result}`, (test) => {
+  ava.test(`.deinterpolate() should deinterpolate ${JSON.stringify(testCase.result)}`, (test) => {
     test.deepEqual(string.deinterpolate(
       testCase.template,
       testCase.result

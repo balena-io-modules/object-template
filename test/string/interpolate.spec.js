@@ -63,7 +63,7 @@ ava.test('.interpolate() should cast false to string if interpolation has contex
   }), 'Foo false baz')
 })
 
-ava.test('.interpolate() should throw if a referenced variable does not exist', (test) => {
+ava.test('.interpolate() should throw if a referenced variable does not exist and no default is specified', (test) => {
   test.throws(() => {
     string.interpolate('{{foo}}', {})
   }, 'Missing variable foo')
@@ -139,4 +139,54 @@ ava.test('.interpolate() should stringify an object with type string when interp
       email: 'johndoe@example.com'
     }
   }), 'Foo {"name":"John Doe","email":"johndoe@example.com"}')
+})
+
+ava.test('.interpolate() should correctly interpolate array values', (test) => {
+  test.deepEqual(string.interpolate('{{points}}', {
+    points: [ 1, 2, 3 ]
+  }), [ 1, 2, 3 ])
+})
+
+ava.test('.interpolate() should ignore default values if the value is present in the data object', (test) => {
+  test.deepEqual(string.interpolate('{{name || "Jane"}}', {
+    name: 'John'
+  }), 'John')
+})
+
+ava.test('.interpolate() should allow default string values', (test) => {
+  test.deepEqual(string.interpolate(
+    '{{name || "Jane"}}',
+    {}), 'Jane')
+})
+
+ava.test('.interpolate() should allow default number values', (test) => {
+  test.deepEqual(string.interpolate('Age is {{name || 6}}',
+    {}), 'Age is 6')
+})
+
+ava.test('.interpolate() should allow default boolean values', (test) => {
+  test.deepEqual(string.interpolate('Foo {{bar || true}} baz',
+    {}), 'Foo true baz')
+})
+
+ava.test('.interpolate() should allow default array values', (test) => {
+  test.deepEqual(string.interpolate('{{bar || [ 1, 2, 3 ]}}',
+    {}), [ 1, 2, 3 ])
+})
+
+ava.test('.interpolate() should allow empty default array values', (test) => {
+  test.deepEqual(string.interpolate('{{bar || []}}',
+    {}), [])
+})
+
+ava.test('.interpolate() should allow default object values', (test) => {
+  test.deepEqual(string.interpolate('{{bar || { "foo": "bar" }}}',
+    {}), {
+    foo: 'bar'
+  })
+})
+
+ava.test('.interpolate() should allow empty default object values', (test) => {
+  test.deepEqual(string.interpolate('{{bar || {}}}',
+    {}), {})
 })

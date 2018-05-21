@@ -110,6 +110,7 @@ API
 | data | <code>Object</code> | template data |
 | [options] | <code>Object</code> | options |
 | [options.delimiters] | <code>Array.&lt;String&gt;</code> | delimiters |
+| [options.allowMissing] | <code>Boolean</code> | allow missing variables |
 
 **Example**  
 ```js

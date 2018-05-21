@@ -190,3 +190,15 @@ ava.test('.interpolate() should allow empty default object values', (test) => {
   test.deepEqual(string.interpolate('{{bar || {}}}',
     {}), {})
 })
+
+ava.test('.interpolate() should not evaluate if no variable and allowMissing is set to true', (test) => {
+  test.deepEqual(string.interpolate('{{missing}}', {}, {
+    allowMissing: true
+  }), '{{missing}}')
+})
+
+ava.test('.interpolate() should not complain about missing variables in a phrase with allowMissing', (test) => {
+  test.deepEqual(string.interpolate('Foo {{missing}}', {}, {
+    allowMissing: true
+  }), 'Foo {{missing}}')
+})
